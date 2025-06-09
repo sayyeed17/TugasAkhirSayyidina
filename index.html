@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WebGIS Kota Cirebon</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Merriweather&family=Roboto+Mono&display=swap" rel="stylesheet">
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="asset/Logo Kota Cirebon.png" alt="Logo Kota Cirebon" />
+      <span>Kota Cirebon</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#beranda" class="sans">Beranda</a></li>
+      <li><a href="#peta" class="mono">Peta</a></li>
+      <li><a href="#informasi" class="serif">Informasi</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="header">
+    <video autoplay muted loop class="bg-video">
+      <source src="asset/Cirebon, Jawa Barat Indonesia 🇮🇩 by drone.mp4" type="video/mp4" />
+    </video>
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+      <h1>Selamat Datang di <br /><span>WebGIS Kota Cirebon</span></h1>
+      <p>Menyediakan informasi spasial kota cirebon dengan peta interaktif yang mudah digunakan!</p>
+    </div>
+  </header>
+
+  <!-- Statistik Kota -->
+  <section class="statistik" id="beranda">
+    <div class="stat-card">
+      <i class="fas fa-users"></i>
+      <h2>307,319</h2>
+      <span>jiwa</span>
+      <p>Populasi</p>
+    </div>
+    <div class="stat-card">
+      <i class="fas fa-map-marker-alt"></i>
+      <h2>37.36</h2>
+      <span>km²</span>
+      <p>Luas Wilayah</p>
+    </div>
+    <div class="stat-card">
+      <i class="fas fa-building"></i>
+      <h2>5</h2>
+      <span>kecamatan</span>
+      <p>Kecamatan</p>
+    </div>
+    <div class="stat-card">
+      <i class="fas fa-tree"></i>
+      <h2>22</h2>
+      <span>kelurahan</span>
+      <p>Kelurahan</p>
+    </div>
+  </section>
+
+  <!-- Peta Interaktif -->
+  <section class="map-section" id="peta">
+    <h2>Peta Interaktif Kota Cirebon</h2>
+    <p>Eksplorasi data spasial dengan berbagai layer informasi yang dapat diaktifkan sesuai kebutuhan</p>
+    <div class="map-container">
+      <div class="layer-control">
+        <h3>Kontrol Layer</h3>
+        <ul>
+          <li><label><input type="checkbox" id="layer-bangunan" checked /> <span style="color:red;">●</span> Bangunan Penting</label></li>
+          <li><label><input type="checkbox" id="layer-faskes" /> <span style="color:green;">●</span> Fasilitas Kesehatan</label></li>
+          <li><label><input type="checkbox" id="layer-pemerintah" /> <span style="color:blue;">●</span> Pusat Pemerintahan</label></li>
+          <li><label><input type="checkbox" id="layer-lahan" checked /> <span style="color:orange;">■</span> Penggunaan Lahan</label></li>
+          <li><label><input type="checkbox" id="layer-jalan" /> <span style="color:gray;">▬</span> Jalan Utama</label></li>
+        </ul>
+        <small>Klik pada layer untuk mengaktifkan/nonaktifkan tampilan di peta</small>
+      </div>
+      <div id="mapid"></div>
+    </div>
+  </section>
+
+  <!-- Informasi Detail -->
+  <section class="info-detail" id="informasi">
+    <h2>Informasi Detail Kota Cirebon</h2>
+    <div class="info-cards">
+      <div class="info-card">
+        <h3><i class="fas fa-user-friends"></i> Demografi</h3>
+        <ul>
+          <li><span>Kepadatan</span><span>8.227 jiwa/km²</span></li>
+          <li><span>Pertumbuhan</span><span>1.2%/tahun</span></li>
+          <li><span>Rasio Gender</span><span>98.5 : 100</span></li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h3><i class="fas fa-school"></i> Infrastruktur</h3>
+        <ul>
+          <li><span>Faskes</span><span>45 unit</span></li>
+          <li><span>Pendidikan</span><span>128 unit</span></li>
+          <li><span>Tempat Ibadah</span><span>89 unit</span></li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h3><i class="fas fa-chart-line"></i> Ekonomi</h3>
+        <ul>
+          <li><span>PDRB/kapita</span><span>Rp 45.2 juta</span></li>
+          <li><span>Pertumbuhan</span><span>5.8%/tahun</span></li>
+          <li><span>Sektor Utama</span><span>Perdagangan & Jasa</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tentang WebGIS -->
+  <section class="tentang">
+    <div class="tentang-container">
+      <div>
+        <h2>Tentang WebGIS Kota Cirebon</h2>
+        <p class="deskripsi">
+          Sistem Informasi Geografis ini dikembangkan untuk mendukung perencanaan pembangunan dan pengambilan keputusan berbasis data spasial di Kota Cirebon.
+        </p>
+      </div>
+      <div class="keunggulan">
+        <h3><i class="fas fa-database"></i> Data Terintegrasi</h3>
+        <p>Menggabungkan data spasial dan atribut untuk memberikan informasi yang komprehensif dan mudah dipahami.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>
+      <h4><i class="fas fa-map-marker-alt"></i>  WebGIS Kota Cirebon</h4>
+      <p>Website Sistem Informasi Geografis yang menampilkan beberapa data geospasial dalam peta interaktif yang mudah digunakan.</p>
+      <p><i class="fas fa-calendar-alt"></i>  Dibuat pada tahun 2025-06-09</p>
+    </div>
+    <div>
+      <h4>Informasi Kontak</h4>
+      <p><i class="fas fa-location-dot"></i> Jalan Perjuangan, Puri Taman Sari Blok E/33</p>
+      <p><i class="fas fa-phone"></i> 0877-8447-4103</p>
+      <p><i class="fas fa-envelope"></i> arrayyan7500@gmail.com</p>
+    </div>
+    <div>
+      <h4>Informasi Pembuat</h4>
+      <div class="card">
+        <p><strong>Arrayyan Alwan Sayyidina</strong></p>
+        <p>Mahasiswa Semester 4 - Mata Kuliah WebGIS</p>
+        <p>Universitas Pendidikan Indonesia</p>
+        <p>Program Studi Sains Informasi Geografi</p>
+        <p>Angkatan 2023</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 WebGIS Kota Cirebon. Dibuat untuk memenuhi tugas UAS Mata Kuliah Webgis. |
+      <a href=>Program Studi Sains Informasi Geografi</a> | <a href=>Kelas 4A</a>
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script src="Script.js"></script>
+</body>
+</html>
