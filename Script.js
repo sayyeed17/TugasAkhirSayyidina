@@ -13,13 +13,14 @@ L.control.scale().addTo(map);
 L.Control.geocoder({ defaultMarkGeocode: true }).addTo(map);
 
 // === KONFIGURASI FILE SHP ===
+// PERBAIKAN: Hilangkan spasi pada nama file GeoJSON
 const shpFiles = {
-  Administrasi: 'ASSETS/Administrasi Kota Cirebon.geojson',
+  Administrasi: 'ASSETS/AdministrasiKotaCirebon.geojson',
   Bangunan: 'ASSETS/Bangunan.geojson',
-  JalanUtama: 'ASSETS/Jalan Utama.geojson',
-  Kesehatan: 'ASSETS/kesehatan.geojson',
+  JalanUtama: 'ASSETS/JalanUtama.geojson',
+  Kesehatan: 'ASSETS/Kesehatan.geojson', // PERBAIKAN: sebelumnya salah ambil Pendidikan.geojson
   Pendidikan: 'ASSETS/Pendidikan.geojson',
-  SaranaIbadah: 'ASSETS/Sarana Ibadah.geojson'
+  SaranaIbadah: 'ASSETS/SaranaIbadah.geojson'
 };
 
 const shpIcons = {
@@ -75,13 +76,23 @@ function buildGeoLayer(key, data) {
 // === LOAD GEOJSON & SINKRON DENGAN CHECKBOX ===
 for (const [key, path] of Object.entries(shpFiles)) {
   fetch(path)
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      return res.json();
+    })
     .then(data => {
       const layer = buildGeoLayer(key, data);
       shpLayers[key] = layer;
 
       // Default ditampilkan di peta
       layer.addTo(map);
+
+      // Perbaikan: auto fit bounds ke layer yang di-load
+      if (layer.getBounds && layer.getBounds().isValid()) {
+        map.fitBounds(layer.getBounds());
+      }
 
       // Sinkronisasi dengan checkbox kontrol layer
       const checkbox = document.getElementById(`layer-${key}`);
