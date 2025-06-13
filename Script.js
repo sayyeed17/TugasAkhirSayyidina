@@ -33,8 +33,8 @@ const shpIcons = {
 
 const shpColors = {
   Administrasi: 'black',
-  Bangunan: 'green',
-  JalanUtama: 'red',
+  Bangunan: 'gray',
+  JalanUtama: 'black',
   Kesehatan: 'green',
   Pendidikan: 'blue',
   SaranaIbadah: 'orange'
