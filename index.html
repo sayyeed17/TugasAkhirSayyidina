@@ -166,11 +166,27 @@
     </div>
     <div class="footer-bottom">
       &copy; 2025 WebGIS Kota Cirebon. Dibuat untuk memenuhi tugas UAS Mata Kuliah Webgis. |
-      <a href=>Program Studi Sains Informasi Geografi</a> | <a href=>Kelas 4A</a>
+      <a href="#">Program Studi Sains Informasi Geografi</a> | <a href="#">Kelas 4A</a>
     </div>
   </footer>
 
-  <!-- Script -->
+  <!-- Script utama -->
   <script src="Script.js"></script>
+
+  <!-- Script pencarian -->
+  <script>
+    
+    if (typeof map !== 'undefined') {
+      L.Control.geocoder({
+        defaultMarkGeocode: true,
+        placeholder: 'Cari lokasi di Cirebon...',
+        errorMessage: 'Lokasi tidak ditemukan',
+        geocoder: L.Control.Geocoder.nominatim()
+      }).addTo(map);
+    } else {
+      console.warn("Map belum terdefinisi. Pastikan 'map' dibuat di Script.js dengan var, bukan const/let.");
+    }
+  </script>
+
 </body>
 </html>
