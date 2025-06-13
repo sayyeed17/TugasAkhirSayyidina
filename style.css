@@ -4,6 +4,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: 'Inter', sans-serif;
   background: #0f172a;
@@ -62,8 +65,13 @@ body {
   color: white;
   transition: color 0.3s ease;
 }
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--accent);
+}
+.nav-links a.active {
+  font-weight: bold;
+  border-bottom: 2px solid var(--accent);
 }
 .nav-links .sans { font-family: 'Inter', sans-serif; }
 .nav-links .mono { font-family: 'Roboto Mono', monospace; }
@@ -230,6 +238,7 @@ body {
   font-size: 0.8rem;
   color: #cbd5e1;
 }
+
 /* ==== INFO DETAIL SECTION ==== */
 .info-detail {
   background: #f1f5f9;
@@ -337,11 +346,9 @@ body {
 .footer > div:first-child {
   padding-left: 1rem;
 }
-.footer > div:nth-child(2) {
-  text-align: center;
-}
+.footer > div:nth-child(2),
 .footer > div:nth-child(3) {
-  text-align: right;
+  text-align: center;
 }
 .footer-bottom {
   grid-column: 1 / -1;
